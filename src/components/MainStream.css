@@ -1,0 +1,12 @@
+.mainVideo {
+  grid-area: contentVideo;
+  height: 52vh;
+  z-index: 0;
+  /* background-color: rgb(167, 80, 116); */
+}
+
+.main2 {
+  grid-area: contentVideoInfo;
+  margin-top: 40px;
+  /* background-color: rgb(161, 228, 53); */
+}

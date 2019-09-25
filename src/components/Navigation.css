@@ -1,0 +1,13 @@
+.focus {
+  border-radius: 8px;
+  opacity: 0.4;
+  background-color: gray;
+}
+
+nav {
+  grid-area: nav;
+  display:flex;justify-content:center;align-items:center;
+  color: #fafafa;
+  height: 1080px;
+  /* background-color: aqua; */
+}

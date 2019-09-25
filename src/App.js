@@ -1,26 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useState, useEffect} from 'react'
+import {
+  Navigation, StreamInfo, StreamVideo, RandomStreamerInfo, ContentLists
+} from './components'
+import './App.css'
+import TClient from './api/twitch'
 
 function App() {
+  let [categories, setCategories] = useState(0)
+  let [streams, setStreams] = useState(0)
+
+  useEffect(()=> {
+    TClient.then((tw) => {
+      tw.helix.games.getTopGamesPaginated().getNext()
+        .then(res => {if (categories === 0) {console.log(res);setCategories(res)}})
+      tw.helix.streams.getStreamsPaginated().getNext()
+        .then(res => {if (streams === 0) {console.log(res);setStreams(res)}})
+    })
+  },[categories, streams])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container" >
+      <Navigation />
+      <StreamInfo info={RandomStreamerInfo} />
+      <ContentLists categories={categories===0?[]:categories} streams={streams===0?[]:streams} />
+      <StreamVideo src={RandomStreamerInfo.url} />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
