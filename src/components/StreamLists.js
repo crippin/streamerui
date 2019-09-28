@@ -3,33 +3,42 @@ import TitleText from './TitleText'
 //import TClient from '../api/twitch'
 
 const StreamCard = (props) => {
-  // Do st clever here
   return (
     <a href="#home">
-      <img width="280" src={props.src} alt="" />
+      <img width={props.width} src={props.src} alt="" />
     </a>
   )
 }
 
 const CardList = (props) => {
   const [list, setList] = useState([])
-  let src = "https://cdn.dribbble.com/users/130163/screenshots/6209150/twitch-avatar.png"
+
   useEffect(() => {
     setList(props.list)
   }, [props.list])
-  console.log(props.list);
+
   let cards = list.map((each, i) => {
-    let src = each.boxArtUrl?each.boxArtUrl:each.thumbnailUrl
+    let src, width, height
+    if (each.boxArtUrl) {
+      src = each.boxArtUrl
+      width = 180
+      height = 320
+    } else {
+      src = each.thumbnailUrl
+      width = 320
+      height = 180
+    }
     return (
       <StreamCard
-        src={src.replace('{width}', 280).replace('{height}', 210)}
-        key={`${props.text}Card${i}`}
+        src={ src.replace('{width}', width).replace('{height}', height) }
+        key={ `${props.src}Card${i}` }
+        width={width}
       />
     )
   })
+
   return (
     <div className="scrollmenu">
-      <TitleText text={props.text} size={24} />
       {cards}
     </div>
   )
@@ -46,8 +55,10 @@ const ContentLists = (props) => {
 
   return (
     <div className="main3 scrollmenu">
-      <CardList list={streams} text={'Top Streams'} />
-      <CardList list={categories} text={'Top Categories'} />
+      <TitleText text={'Top Streams'} size={24} />
+      <CardList list={streams} />
+      <TitleText text={'Top Categories'} size={24} />
+      <CardList list={categories} />
     </div>
   )
 }

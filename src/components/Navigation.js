@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import './Navigation.css'
 
 const NavIcon = (props) => {
@@ -10,11 +11,11 @@ const NavIcon = (props) => {
 
   return (
     <li className={focus}>
-      <a href="#main-navigation" onClick={props.onClick}>
+      <Link to="/watch" onClick={props.onClick}>
         <i style={{'fontSize': '48px'}} className="material-icons">
           {props.name}
         </i>
-      </a>
+      </Link>
     </li>
   )
 }
