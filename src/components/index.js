@@ -1,6 +1,7 @@
-export {default as Navigation} from './Navigation'
+export {Navigation} from './Navigation'
 export {StreamInfo, StreamVideo} from './MainStream'
-export {default as TitleText} from './TitleText'
+export {TitleText} from './TitleText'
+export {HlsVideoPlayer} from './HlsVideoPlayer'
 export const BigBuckBunny = 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'
 export const RandomStreamerInfo = {
     name: 'Channel Name',

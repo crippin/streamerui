@@ -18,7 +18,10 @@ li a {
 }
 
 div.scrollmenu {
-  overflow: auto;
+  scroll-snap-type: x mandatory;
+  /* -webkit-overflow-scrolling:  */
+  /* overflow: auto; */
+  overflow-x: scroll;
   white-space: nowrap;
 }
 
@@ -30,14 +33,14 @@ div.scrollmenu a {
   text-decoration: none;
 }
 
-div.scrollmenu a:hover {
+div.scrollmenu :hover {
   background-color: #777;
 }
 
 .container {
-  display: grid;
-
-  grid-template-areas:
+  display: flex;
+  /* overflow: hidden; */
+  /* grid-template-areas:
       "nav contentVideoInfo contentVideo"
       "nav contentVideoInfo contentVideo"
       "nav contentVideoList contentVideoList"
@@ -45,14 +48,49 @@ div.scrollmenu a:hover {
 
   grid-template-columns: 80px 1fr 1.5fr;
 
-  grid-gap: 10px;
-
+  grid-gap: 10px; */
+  overflow-y: hidden;
   height: 1080px; 
 }
 
 .main3 {
   grid-area: contentVideoList;
-  z-index: 1;
+  /* z-index: 1; */
+  height: 517px;
   /* background-color: rgb(26, 115, 192); */
 }
 
+.streamCard {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.focused {
+ background-color: #777;
+}
+
+.streamCard img {vertical-align: middle;}
+
+.streamCard h1 {
+  position: absolute;
+  bottom: 0;
+  background: rgb(0, 0, 0); /* Fallback color */
+  background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
+  color: #f1f1f1;
+  width: 100%;
+  padding: 20px;
+}
+
+.up {
+  display: flex;
+}
+
+.content {
+  width: 1832px;
+  margin-left: 8px;
+}
+
+/* video {
+  transition: all 5s;
+} */

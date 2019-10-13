@@ -1,22 +1,25 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import './Navigation.css'
+import {useSpring, animated} from 'react-spring'
 
 const NavIcon = (props) => {
-  const [focus, setFocus] = useState('')
+  //const [focus, setFocus] = useState('')
 
-  useEffect(() => {
-    setFocus(props.focus)
-  }, [props.focus])
+ /*  useEffect(() => {
+    //setFocus(props.focus)
+  }, [props.focus]) */
 
   return (
-    <li className={focus}>
-      <Link to="/watch" onClick={props.onClick}>
-        <i style={{'fontSize': '48px'}} className="material-icons">
-          {props.name}
-        </i>
-      </Link>
-    </li>
+    <div >
+      <li className={focus}>
+        <Link to="/watch" onClick={props.onClick}>
+          <i style={{'fontSize': '48px'}} className="material-icons">
+            {props.name}
+          </i>
+        </Link>
+      </li>
+    </div>
   )
 }
 
@@ -51,4 +54,4 @@ const Navigation = (props) => {
   )
 }
 
-export default Navigation
+export {Navigation}

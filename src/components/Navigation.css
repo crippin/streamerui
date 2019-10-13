@@ -9,5 +9,6 @@ nav {
   display:flex;justify-content:center;align-items:center;
   color: #fafafa;
   height: 1080px;
+  width: 80px;
   /* background-color: aqua; */
 }
