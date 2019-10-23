@@ -1,3 +1,7 @@
+::-webkit-scrollbar {
+  display: none;
+}
+
 body {
   background-color: black;
   color: #fafafa;
@@ -39,25 +43,13 @@ div.scrollmenu :hover {
 
 .container {
   display: flex;
-  /* overflow: hidden; */
-  /* grid-template-areas:
-      "nav contentVideoInfo contentVideo"
-      "nav contentVideoInfo contentVideo"
-      "nav contentVideoList contentVideoList"
-      "nav contentVideoList contentVideoList";
-
-  grid-template-columns: 80px 1fr 1.5fr;
-
-  grid-gap: 10px; */
   overflow-y: hidden;
   height: 1080px; 
 }
 
 .main3 {
   grid-area: contentVideoList;
-  /* z-index: 1; */
-  height: 517px;
-  /* background-color: rgb(26, 115, 192); */
+  height: 498px;
 }
 
 .streamCard {
@@ -89,8 +81,7 @@ div.scrollmenu :hover {
 .content {
   width: 1832px;
   margin-left: 8px;
+  overflow: unset;
+  left: 80px;
+  position: fixed;
 }
-
-/* video {
-  transition: all 5s;
-} */

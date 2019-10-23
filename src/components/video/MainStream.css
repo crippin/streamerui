@@ -1,0 +1,46 @@
+.mainVideo {
+  grid-area: contentVideo;
+  /* transition: all 0.5s; */
+  /* height: 52vh; */
+  z-index: 0;
+  /* position: fixed; */
+  /* background-color: rgb(167, 80, 116); */
+}
+
+#myVideo {
+  /* transition: all 0.5s; */
+}
+
+#media-controls {
+  display: flex;
+  position: fixed;
+  bottom: 10%;
+  left: 0;
+  padding: 5px;
+}
+
+.main2 {
+  grid-area: contentVideoInfo;
+  margin-top: 40px;
+  width: 592px;
+  transition: ease-in 5s;
+  /* background-color: rgb(161, 228, 53); */
+}
+
+.text-enter {
+  opacity: 0;
+  transform: scale(0.9);
+}
+.text-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 300ms, transform 300ms;
+}
+.text-exit {
+  opacity: 1;
+}
+.text-exit-active {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 300ms, transform 300ms;
+}
