@@ -77,7 +77,7 @@ const cardList = (props) => {
         onArrowPress={ ()=>{/** block setInfo */} }
         onEnterPress={ props.onPress }
         onBecameFocused={ ()=>{
-          scrollIntoView(ref.current,{ behavior: 'smooth', block: 'end', inline: "start"})}
+          scrollIntoView(ref.current,{ behavior: 'smooth', inline: "start"})}
         }
         pRef={ ref }
         focusKey={ each.userId?props.type+''+each.userId:props.type+''+each.id }
@@ -148,11 +148,11 @@ const ContentLists = (props) => {
   console.log('#Rendering ALL LIST #')
   return (
     <div className="main3 scrollmenu" >
-      <TitleText text={'Top Streams'} size={24} />
+      <TitleText text={'Top Streams'} size={24} style={{fontWeight: '800'}} />
       <CardList type={'stream'} list={streams} setInfo={props.setInfo} onPress={props.onPress} />
-      <TitleText text={'Followed Streams'} size={24} />
+      <TitleText text={'Followed Streams'} size={24} style={{fontWeight: '800'}} />
       <CardList type={'follow'} list={followedStreams} setInfo={props.setInfo} onPress={props.onPress} />
-      <TitleText text={'Top Categories'} size={24} />
+      <TitleText text={'Top Categories'} size={24} style={{fontWeight: '800'}} />
       <CardList type={'cat'} list={categories} setInfo={props.setInfo} style={{marginBottom: '5%'}} onPress={props.onPress} />
     </div>
   )
