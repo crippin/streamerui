@@ -11,15 +11,18 @@ const HlsVideoPlayer = props => {
     src: props.src?props.src[0].url:'',
     autoPlay: true,
     preload: '',
+    muted: '',
+    controls: true,
+    crossOrigin: "*"
   }
 
   let video = React.createElement(
     'video',
     defaultProps,
     [
-      props.src?
+      /* props.src?
       props.src.map( (each, index) => React.createElement('source', { key: index, src: each.url })):
-      []
+      [] */
     ]
   )
   hls.attachMedia(video)

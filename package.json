@@ -2,6 +2,8 @@
   "name": "streamer",
   "version": "0.1.0",
   "private": true,
+  "main": "main.js",
+  "homepage": "./",
   "jest": {
     "modulePathIgnorePatterns": [
       "CLI",
@@ -32,7 +34,8 @@
     "start": "webpack-dev-server --progress --colors",
     "build": "webpack --mode production",
     "build-ipk": "yarn build && bash tools/build.sh",
-    "install-ipk": "yarn build-ipk && bash tools/install.sh"
+    "install-ipk": "yarn build-ipk && bash tools/install.sh",
+    "start-electron": "electron ."
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -57,6 +60,8 @@
     "babel-eslint": "10.0.3",
     "babel-loader": "^8.0.6",
     "css-loader": "^3.2.0",
+    "electron": "^7.1.1",
+    "electron-builder": "^22.1.0",
     "eslint": "^6.4.0",
     "eslint-plugin-react": "^7.14.3",
     "webpack": "^4.41.1",
