@@ -8,7 +8,7 @@ const StreamerAvatar = (props) => {
   return (
     <div className="avatar">
       <img id="avatarImg" src={props.src} alt="" />
-      <TitleText text={props.name} size={34} style={{ marginLeft: '70px' }} />
+      <TitleText text={props.name} size={36} style={{ marginLeft: '10px' }} />
     </div>
   )
 }
@@ -18,18 +18,17 @@ const StreamInfo = ({ info }) => {
   return (
     <div className="main2">
       <StreamerAvatar name={info.name} src={info.profilePicture} />
-      <TitleText text={'Title:'} size={22} stle={{ marginTop: '50px' }} />
-      <div style={{ overflow: 'hidden' }} >
-        <TitleText text={info.title} size={28} style={{
+      <div style={{ overflow: 'hidden', width: '700px', marginTop: '20px' }} >
+        <TitleText text={info.title} size={30} style={{
           whiteSpace: 'nowrap',
           animation: 'floatLeft 20s 5s infinite linear',
         }} />
       </div>
-      <div style={{ display: 'flex', position: 'relative', top: '80px', color: 'gold' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', position: 'relative', color: 'gold', marginLeft: '20px' }}>
         <TitleText text={'Playing with:'} size={18} />
-        <TitleText text={info.game} size={22} style={{ marginTop: '-20px' }} />
+        <TitleText text={info.game} size={22} style={{ marginTop: '-20px', marginBottom: '-20px', marginLeft: '10px' }} />
         <TitleText text={'Viewers:'} size={18} />
-        <TitleText text={info.viewers} size={22} style={{ marginLeft: '-64px', marginTop: '-5px' }} />
+        <TitleText text={info.viewers} size={22} style={{ marginTop: '-20px', marginBottom: '-20px', marginLeft: '10px' }} />
       </div>
     </div>
   )
