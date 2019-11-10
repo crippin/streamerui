@@ -53,7 +53,8 @@ const cardList = (props) => {
     }
   },[props.list])
 
-  let cards = props.list?props.list.data.map((each, i) => {
+  const refList = props.list?props.list.data.map(() => createRef()):[]
+  const cards = props.list?props.list.data.map((each, i) => {
     let src, width, height
     if (each.boxArtUrl) {
       src = each.boxArtUrl
@@ -64,7 +65,35 @@ const cardList = (props) => {
       width = 320
       height = 180
     }
-    const ref = createRef()
+
+    const Navigate = (direction) => {
+      if (direction === 'up'){
+        scrollIntoView(
+          props.topRef.current,
+          { behavior: 'smooth', block: 'start'}
+        )
+      } else if (direction === 'down'){
+        scrollIntoView(
+          props.downRef.current,
+          { behavior: 'smooth', block: 'start'}
+        )
+      } else if (direction === 'right') {
+        if (props.list.data.length > 5) {
+          scrollIntoView(
+            refList[i + 1].current,
+            { behavior: 'smooth', block:'nearest', inline: "start" }
+          )
+        }
+      } else {
+        if (props.list.data.length > 5 && i !== 0) {
+          scrollIntoView(
+            refList[i - 1].current,
+            { behavior: 'smooth', block:'nearest', inline: "start" }
+          )
+        }
+      }
+    }
+
     return (
       <StreamCard
         src={ src.replace('{width}', width).replace('{height}', height) }
@@ -74,12 +103,9 @@ const cardList = (props) => {
         type={props.type}
         setInfo={ props.setInfo }
         name={ each.userDisplayName }
-        onArrowPress={ ()=>{/** block setInfo */} }
+        onArrowPress={ Navigate }
         onEnterPress={ props.onPress }
-        onBecameFocused={ ()=>{
-          scrollIntoView(ref.current,{ behavior: 'smooth', inline: "start"})}
-        }
-        pRef={ ref }
+        pRef={ refList[i] }
         focusKey={ each.userId?props.type+''+each.userId:props.type+''+each.id }
       />
     )
@@ -146,14 +172,52 @@ const ContentLists = (props) => {
   }, [props.user])
 
   console.log('#Rendering ALL LIST #')
+  const topStreamTextRef = createRef()
+  const followStreamTextRef = createRef()
+  const categoriesTextRef = createRef()
   return (
     <div className="main3 scrollmenu" >
-      <TitleText text={'Top Streams'} size={24} style={{fontWeight: '800'}} />
-      <CardList type={'stream'} list={streams} setInfo={props.setInfo} onPress={props.onPress} />
-      <TitleText text={'Followed Streams'} size={24} style={{fontWeight: '800'}} />
-      <CardList type={'follow'} list={followedStreams} setInfo={props.setInfo} onPress={props.onPress} />
-      <TitleText text={'Top Categories'} size={24} style={{fontWeight: '800'}} />
-      <CardList type={'cat'} list={categories} setInfo={props.setInfo} style={{marginBottom: '5%'}} onPress={props.onPress} />
+      <TitleText text={'Top Streams'} size={24} pref={topStreamTextRef} />
+      <CardList
+        type={'stream'}
+        list={streams}
+        setInfo={props.setInfo}
+        onPress={props.onPress}
+        opRef={topStreamTextRef} //maybe pass a list of refs
+        downRef={followStreamTextRef}
+        currTextRef={topStreamTextRef}
+      />
+      <TitleText
+        text={'Followed Streams'}
+        size={24}
+        style={{marginBottom: '-10px', marginTop: '30px'}}
+        pref={followStreamTextRef}
+      />
+      <CardList
+        type={'follow'}
+        list={followedStreams}
+        setInfo={props.setInfo}
+        onPress={props.onPress}
+        topRef={topStreamTextRef}
+        downRef={categoriesTextRef}
+        currTextRef={followStreamTextRef}
+      />
+      <TitleText
+        text={'Top Categories'}
+        size={24}
+        style={{marginBottom: '-10px', marginTop: '30px'}}
+        pref={categoriesTextRef}
+      />
+      <CardList
+        type={'cat'}
+        list={categories}
+        setInfo={props.setInfo}
+        style={{marginBottom: '5%'}}
+        onPress={props.onPress}
+        topRef={followStreamTextRef}
+        downRef={categoriesTextRef}
+        currTextRef={categoriesTextRef}
+      />
     </div>
   )
 }
