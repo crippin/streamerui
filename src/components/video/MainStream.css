@@ -24,6 +24,7 @@
   display: flex;
   flex-direction: row;
 }
+
 #avatarImg {
   width: 120px;
   height: 120px;

@@ -5,15 +5,15 @@ import './Navigation.css'
 
 const navIcon = (props) => {
   return (
-    <li className={props.focused?'focused':''} style={{paddingBottom: '20px', paddingTop: '20px'}}>
+    <li className={props.focused ? 'focused' : ''} style={{ paddingBottom: '20px', paddingTop: '20px' }}>
       <Link to="/watch" onClick={props.onClick}>
         <img width={'56px'} src={`resource/icon/${props.name}-24px.svg`} />
-        {props.show?<span style={{
-            fontSize: '36px',
-            position: 'relative',
-            bottom: '14px',
-            padding: '10px'
-        }}>{props.text}</span>:null
+        {props.show ? <span style={{
+          fontSize: '36px',
+          position: 'relative',
+          bottom: '14px',
+          padding: '10px'
+        }}>{props.text}</span> : null
         }
       </Link>
     </li>
@@ -24,14 +24,14 @@ const NavIcon = withFocusable()(navIcon)
 
 const navigation = (props) => {
   console.log('##NAV RENDER')
-  const [style, setStyle] = useState({width: '80px'})
-  useEffect(()=> {
+  const [style, setStyle] = useState({ width: '80px' })
+  useEffect(() => {
     if (props.hasFocusedChild) {
-      setStyle({width: '400px', zIndex: 2})
+      setStyle({ width: '400px', zIndex: 2 })
     } else {
-      setStyle({width: '80px'})
+      setStyle({ width: '80px' })
     }
-  },[props.hasFocusedChild])
+  }, [props.hasFocusedChild])
   return (
     <nav id="main-navigation" style={style} >
       <ul>
@@ -49,14 +49,14 @@ const navigation = (props) => {
           text={'Home'}
           show={props.hasFocusedChild}
         />
-        <NavIcon 
+        <NavIcon
           trackChildren
           forgetLastFocusedChild
           name={'videogame_asset'}
           text={'Categories'}
           show={props.hasFocusedChild}
         />
-        <NavIcon 
+        <NavIcon
           trackChildren
           forgetLastFocusedChild
           name={'featured_video'}
@@ -67,5 +67,5 @@ const navigation = (props) => {
     </nav>
   )
 }
-const Navigation = withFocusable({ trackChildren: true, forgetLastFocusedChild: true})(navigation)
-export {Navigation}
+const Navigation = withFocusable({ trackChildren: true, forgetLastFocusedChild: true })(navigation)
+export { Navigation }
