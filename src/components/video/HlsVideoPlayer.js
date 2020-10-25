@@ -8,7 +8,7 @@ const HlsVideoPlayer = props => {
     stream: props.stream,
     id: props.id,
     height: props.size,
-    src: props.src?props.src[0].url:'',
+    src: props.src ? props.src[0].url : '',
     autoPlay: true,
     preload: '',
   }
@@ -17,9 +17,9 @@ const HlsVideoPlayer = props => {
     'video',
     defaultProps,
     [
-      props.src?
-      props.src.map( (each, index) => React.createElement('source', { key: index, src: each.url })):
-      []
+      props.src ?
+        props.src.map((each, index) => React.createElement('source', { key: index, src: each.url })) :
+        []
     ]
   )
   hls.attachMedia(video)
@@ -27,4 +27,4 @@ const HlsVideoPlayer = props => {
   return video
 }
 
-export {HlsVideoPlayer}
+export { HlsVideoPlayer }

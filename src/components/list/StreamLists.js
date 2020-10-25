@@ -5,23 +5,22 @@ import scrollIntoView from 'scroll-into-view-if-needed'
 import { TitleText } from '../text/TitleText'
 
 
-const streamCard = ({focused, setInfo, id, type, name, src, width, pRef}) => {
+const streamCard = ({ focused, setInfo, id, type, name, src, width, pRef }) => {
 
   useEffect(() => {
     if (focused) {
       setInfo(id, type)
     }
-  },[focused])
+  }, [focused])
 
   return (
-    <a href="#home" className={`${focused?'focused':'' }`} ref={pRef} id={id} >
+    <a href="#home" className={`${focused ? 'focused' : ''}`} ref={pRef} id={id} >
       <div className={`streamCard`} >
         <img width={width} src={src}
-          onClick={(e)=> {
+          onClick={(e) => {
             console.log('## StreamCard Interract: ##')
             console.log(e.target)
-            //setInfo(e.target.id)
-            }
+          }
           }
         />
         <h1>{name}</h1>
@@ -48,12 +47,12 @@ const cardList = (props) => {
   console.log(props.list)
 
   useEffect(() => {
-   if (props.list && props.list.data[0] && props.list.data[0].userId && props.type === 'stream') {
-     props.setFocus('stream' + props.list.data[0].userId)
+    if (props.list && props.list.data[0] && props.list.data[0].userId && props.type === 'stream') {
+      props.setFocus('stream' + props.list.data[0].userId)
     }
-  },[props.list])
+  }, [props.list])
 
-  let cards = props.list?props.list.data.map((each, i) => {
+  let cards = props.list ? props.list.data.map((each, i) => {
     let src, width, height
     if (each.boxArtUrl) {
       src = each.boxArtUrl
@@ -67,28 +66,29 @@ const cardList = (props) => {
     const ref = createRef()
     return (
       <StreamCard
-        src={ src.replace('{width}', width).replace('{height}', height) }
-        key={ `${each.userDisplayName}Card${i}` }
-        width={ width }
-        id={ each.userId?props.type+'-'+each.userId:props.type+''+each.id }
+        src={src.replace('{width}', width).replace('{height}', height)}
+        key={`${each.userDisplayName}Card${i}`}
+        width={width}
+        id={each.userId ? props.type + '-' + each.userId : props.type + '' + each.id}
         type={props.type}
-        setInfo={ props.setInfo }
-        name={ each.userDisplayName }
-        onArrowPress={ ()=>{/** block setInfo */} }
-        onEnterPress={ props.onPress }
-        onBecameFocused={ ()=>{
-          scrollIntoView(ref.current,{ behavior: 'smooth', inline: "start"})}
+        setInfo={props.setInfo}
+        name={each.userDisplayName}
+        onArrowPress={() => {/** block setInfo */ }}
+        onEnterPress={props.onPress}
+        onBecameFocused={() => {
+          scrollIntoView(ref.current, { behavior: 'smooth', inline: "start" })
         }
-        pRef={ ref }
-        focusKey={ each.userId?props.type+''+each.userId:props.type+''+each.id }
+        }
+        pRef={ref}
+        focusKey={each.userId ? props.type + '' + each.userId : props.type + '' + each.id}
       />
     )
-  }):<div />
+  }) : <div />
 
   return (
     <div
       className="scrollmenu"
-      style={props.style?props.style:{}}
+      style={props.style ? props.style : {}}
     >
       {cards}
     </div>
@@ -117,16 +117,16 @@ const ContentLists = (props) => {
       }
     })
   }
-  
+
   const initFollowedStreams = (user, cursor) => {
-    followedStreamsPaginated.current = api.streams.getStreamsPaginated({userId: user.following})
+    followedStreamsPaginated.current = api.streams.getStreamsPaginated({ userId: user.following })
     followedStreamsPaginated.current.getNext().then(res => {
       if (followedStreamsPaginated.current.currentCursor !== cursor) {
         setFollowedStreams({ data: res, cursor: followedStreamsPaginated.current.currentCursor })
       }
     })
   }
-  
+
   const initTopGames = cursor => {
     topGamesPaginated.current = api.games.getTopGamesPaginated()
     topGamesPaginated.current.getNext().then(res => {
@@ -148,12 +148,12 @@ const ContentLists = (props) => {
   console.log('#Rendering ALL LIST #')
   return (
     <div className="main3 scrollmenu" >
-      <TitleText text={'Top Streams'} size={24} style={{fontWeight: '800'}} />
+      <TitleText text={'Top Streams'} size={24} style={{ fontWeight: '800' }} />
       <CardList type={'stream'} list={streams} setInfo={props.setInfo} onPress={props.onPress} />
-      <TitleText text={'Followed Streams'} size={24} style={{fontWeight: '800'}} />
+      <TitleText text={'Followed Streams'} size={24} style={{ fontWeight: '800' }} />
       <CardList type={'follow'} list={followedStreams} setInfo={props.setInfo} onPress={props.onPress} />
-      <TitleText text={'Top Categories'} size={24} style={{fontWeight: '800'}} />
-      <CardList type={'cat'} list={categories} setInfo={props.setInfo} style={{marginBottom: '5%'}} onPress={props.onPress} />
+      <TitleText text={'Top Categories'} size={24} style={{ fontWeight: '800' }} />
+      <CardList type={'cat'} list={categories} setInfo={props.setInfo} style={{ marginBottom: '5%' }} onPress={props.onPress} />
     </div>
   )
 }

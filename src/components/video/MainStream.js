@@ -7,38 +7,38 @@ import './MainStream.css'
 const StreamerAvatar = (props) => {
   return (
     <div className="avatar">
-      <img id="avatarImg" src={props.src} alt=""/>
-      <TitleText text={props.name} size={34} style={{marginLeft: '70px'}} />
+      <img id="avatarImg" src={props.src} alt="" />
+      <TitleText text={props.name} size={34} style={{ marginLeft: '70px' }} />
     </div>
   )
 }
-const StreamInfo = ({info}) => {
+const StreamInfo = ({ info }) => {
   const [show, setShow] = useState(false);
-console.log('<-infoRendering->')
+  console.log('<-infoRendering->')
   return (
     <div className="main2">
       <StreamerAvatar name={info.name} src={info.profilePicture} />
-      <TitleText text={'Title:'} size={22} stle={{marginTop: '50px'}}/>
-      <div style={{overflow: 'hidden'}} >
+      <TitleText text={'Title:'} size={22} stle={{ marginTop: '50px' }} />
+      <div style={{ overflow: 'hidden' }} >
         <TitleText text={info.title} size={28} style={{
           whiteSpace: 'nowrap',
           animation: 'floatLeft 20s 5s infinite linear',
         }} />
       </div>
-      <div style={{display: 'flex', position: 'relative', top: '80px', color: 'gold'}}>
+      <div style={{ display: 'flex', position: 'relative', top: '80px', color: 'gold' }}>
         <TitleText text={'Playing with:'} size={18} />
-        <TitleText text={info.game} size={22} style={{marginTop: '-20px'}} />
+        <TitleText text={info.game} size={22} style={{ marginTop: '-20px' }} />
         <TitleText text={'Viewers:'} size={18} />
-        <TitleText text={info.viewers} size={22} style={{marginLeft: '-64px', marginTop: '-5px'}} />
+        <TitleText text={info.viewers} size={22} style={{ marginLeft: '-64px', marginTop: '-5px' }} />
       </div>
     </div>
   )
 }
 
-const myButton = ({name, focused}) => {
+const myButton = ({ name, focused }) => {
   return (
     <div>
-      <img className={`${focused?'focused':'' }`} width="128px" style={{position: 'relative', bottom: '-100px'}} src={`resource/icon/${name}-24px.svg`} />
+      <img className={`${focused ? 'focused' : ''}`} width="128px" style={{ position: 'relative', bottom: '-100px' }} src={`resource/icon/${name}-24px.svg`} />
     </div>
   )
 }
@@ -64,23 +64,23 @@ const MediaPlayer = (props) => {
     props.setFullScreen(false)
   }
 
-  const onFocused = () =>  {
+  const onFocused = () => {
     setOpacity(1)
     clearTimeout(timer)
-    setTimer(setTimeout(()=>{
+    setTimer(setTimeout(() => {
       console.log(timer)
       setOpacity(0)
-    },12000))
+    }, 12000))
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     return () => {
       clearTimeout(timer)
     }
-  },[])
+  }, [])
 
   return (
-    <div id="media-controls" style={{opacity: opacity, transition: 'ease-in 2s'}} >
+    <div id="media-controls" style={{ opacity: opacity, transition: 'ease-in 2s' }} >
       <PlayButton name="play_arrow" onBecameFocused={onFocused} focusKey="playButton" onEnterPress={() => togglePlayPause()} />
       <ToogleFullScreenButton onBecameFocused={onFocused} name="fullscreen_exit" focusKey="fullscreen_exit" onEnterPress={() => exitFullscreen()} />
     </div>
@@ -88,19 +88,19 @@ const MediaPlayer = (props) => {
 }
 
 const streamVideo = (props) => {
-  const [style, setStyle] = useState({height: '582px'})
+  const [style, setStyle] = useState({ height: '582px' })
   const [size, setSize] = useState('720px')
   const [overlay, setOverlay] = useState('inherit')
 
-  useEffect(()=>{
+  useEffect(() => {
     if (props.maximize === true) {
       setOverlay('none')
-      setStyle({height:'1500px', width: '1920px', zIndex: 2, position: 'fixed', left: 0});
+      setStyle({ height: '1500px', width: '1920px', zIndex: 2, position: 'fixed', left: 0 });
       setSize('1080px')
       props.setFocus('playButton')
     } else {
       setOverlay('inherit')
-      setStyle({height:'582px', width: '1280px', zIndex: 0})
+      setStyle({ height: '582px', width: '1280px', zIndex: 0 })
       setSize('720px')
     }
   }, [props.maximize])
@@ -108,7 +108,7 @@ const streamVideo = (props) => {
 
   return (
     <div className="mainVideo" style={style} >
-      <HlsVideoPlayer id="myVideo" src={props.src} size={size} stream={props.info.type+ '' + props.info.id} />
+      <HlsVideoPlayer id="myVideo" src={props.src} size={size} stream={props.info.type + '' + props.info.id} />
       <div style={{
         width: '360px',
         background: 'linear-gradient(to left, rgba(0,0,0,0), rgba(0,0,0,1))',
@@ -131,4 +131,4 @@ const streamVideo = (props) => {
 }
 const StreamVideo = withFocusable({ trackChildren: true })(streamVideo)
 
-export {StreamInfo, StreamVideo}
+export { StreamInfo, StreamVideo }
