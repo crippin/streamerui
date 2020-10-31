@@ -8,6 +8,7 @@ import { TClient, getHlsUrls } from './api/twitch'
 import { initNavigation } from '@noriginmedia/react-spatial-navigation'
 import Content from './Content'
 import './App.css'
+import { useTwitchApi } from './api/api.js'
 
 initNavigation(/* {
   debug: true,
@@ -17,14 +18,14 @@ initNavigation(/* {
 const App = () => {
   const [api, setApi] = useState(null)
   const [style, setStyle] = useState(null)
+  //const api = store.client
 
   useEffect(() => {
-    TClient.then((tw) => {
-      setApi(tw.helix)
-    })
+    setApi(TClient.helix)
   }, [])
 
   console.log('####RENDERING####')
+  //console.log(store)
   return (
     <div className="container" style={style} >
       <Router>

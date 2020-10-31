@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { useTwitchApi } from './api/api'
 import { TClient, getHlsUrls } from './api/twitch'
 import {
   Navigation, StreamInfo, StreamVideo,

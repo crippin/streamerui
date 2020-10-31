@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { withFocusable } from '@noriginmedia/react-spatial-navigation'
 import scrollIntoView from 'scroll-into-view-if-needed'
 import { TitleText } from '../text/TitleText'
+import { useTwitchApi } from '../../api/api'
 
 
 const streamCard = ({ focused, setInfo, id, type, name, src, width, pRef }) => {
@@ -133,7 +134,10 @@ const ContentLists = (props) => {
 
   const initTopStreams = cursor => {
     topStreamsPaginated.current = api.streams.getStreamsPaginated()
+    console.log('initTop')
+    console.log(topStreamsPaginated.current)
     topStreamsPaginated.current.getNext().then(res => {
+      console.log(res)
       if (topStreamsPaginated.current.currentCursor !== cursor) {
         setStreams({ data: res, cursor: topStreamsPaginated.current.currentCursor })
         if (res[0]) {
@@ -171,6 +175,7 @@ const ContentLists = (props) => {
   }, [props.user])
 
   console.log('#Rendering ALL LIST #')
+  console.log(streams)
   const topStreamTextRef = createRef()
   const followStreamTextRef = createRef()
   const categoriesTextRef = createRef()
